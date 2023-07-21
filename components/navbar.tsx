@@ -3,7 +3,7 @@ import MobileNavbar from "./mobileNavbar"
 
 const Navbar = () => {
   return (
-    <div className="flex items-center p-4 bg-[#1f1f1f] md:ml-2 md:rounded-b-md">
+    <div className="flex items-center p-4 bg-[#1f1f1f] md:ml-2 md:rounded-bl-md">
         <MobileNavbar />
         <div className="flex w-full justify-end">
             <UserButton afterSignOutUrl="/" />
