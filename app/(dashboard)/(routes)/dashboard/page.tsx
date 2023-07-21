@@ -10,8 +10,7 @@ const tools = [
     label: "Bate-papo",
     icon: MessageSquare,
     href: "/conversa",
-    color: "text-violet-500",
-    bgColor: "bg-violet-500/10"
+    color: "text-violet-500"
   },
   {
     label: "Gerador de imagem",
@@ -57,7 +56,7 @@ const Dashboard = () => {
           {tools.map((tool) => (
             <Card onClick={() => router.push(tool.href)} key={tool.href} className="p-4 flex bg-[#1f1f1f] text-white border-black/5 items-center justify-between hover:shadow-md transition cursor-pointer">
               <div className="flex items-center gap-x-4">
-                <div className={cn("p-2 w-fit rounded-md", tool.bgColor)}>
+                <div className={cn("p-2 w-fit rounded-md")}>
                   <tool.icon className={cn("w-6 h-6", tool.color)} />
                 </div>
                 <div className="font-semibold">
