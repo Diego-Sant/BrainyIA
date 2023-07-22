@@ -2,7 +2,7 @@
 
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { MessageSquare, ImageIcon, VideoIcon, Music, Code, Settings, ArrowRight } from "lucide-react";
+import { MessageSquare, ImageIcon, VideoIcon, Music, Code, Settings, ArrowRight, Pi, ScrollText, TestTube2, Languages } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 const tools = [
@@ -35,6 +35,30 @@ const tools = [
     icon: Code,
     href: "/codigo",
     color: "text-green-700",
+  },
+  {
+    label: "Tradutor",
+    icon: Languages,
+    href: "/tradutor",
+    color: "text-amber-600",
+  },
+  {
+    label: "Matemática",
+    icon: Pi,
+    href: "/matematica",
+    color: "text-cyan-500",
+  },
+  {
+    label: "História",
+    icon: ScrollText,
+    href: "/historia",
+    color: "text-yellow-600",
+  },
+  {
+    label: "Ciência",
+    icon: TestTube2,
+    href: "/ciencia",
+    color: "text-red-600",
   },
   {
     label: "Configurações",

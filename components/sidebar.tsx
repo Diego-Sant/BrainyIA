@@ -9,7 +9,7 @@ import Logo from "@/public/images/logo.png"
 
 import { cn } from "@/lib/utils";
 
-import { LayoutDashboard, MessageSquare, ImageIcon, VideoIcon, Music, Code, Settings } from "lucide-react";
+import { LayoutDashboard, MessageSquare, ImageIcon, VideoIcon, Music, Code, Settings, Pi, ScrollText, TestTube2, Languages } from "lucide-react";
 
 const montserrat = Montserrat({ weight: "600", subsets: ["latin"] });
 
@@ -49,6 +49,30 @@ const routes = [
     icon: Code,
     href: "/codigo",
     color: "text-green-700",
+  },
+  {
+    label: "Tradutor",
+    icon: Languages,
+    href: "/tradutor",
+    color: "text-amber-600",
+  },
+  {
+    label: "Matemática",
+    icon: Pi,
+    href: "/matematica",
+    color: "text-cyan-500",
+  },
+  {
+    label: "História",
+    icon: ScrollText,
+    href: "/historia",
+    color: "text-yellow-600",
+  },
+  {
+    label: "Ciência",
+    icon: TestTube2,
+    href: "/ciencia",
+    color: "text-red-600",
   },
   {
     label: "Configurações",

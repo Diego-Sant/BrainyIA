@@ -2,18 +2,17 @@
 
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod"
-
 import axios from "axios";
 import {ChatCompletionRequestMessage} from "openai";
 
-import { MessageSquare, SendHorizonal, Trash2 } from "lucide-react"
+import { Code, SendHorizonal, Trash2 } from "lucide-react"
 
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import { useForm } from "react-hook-form"
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-import Heading from "@/components/heading"
+import Heading from "@/components/heading";
 import { cn } from "@/lib/utils";
 import { formSchema } from "./constants";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
@@ -25,7 +24,7 @@ import { UserAvatar } from "@/components/userAvatar";
 import { BotAvatar } from "@/components/botAvatar";
 import { AlertDialog, AlertDialogFooter, AlertDialogHeader, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 
-const ConversationPage = () => {
+const CodePage = () => {
     const router = useRouter();
     const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>([]);
     
@@ -47,14 +46,14 @@ const ConversationPage = () => {
 
             const newMessages = [...messages, userMessage]; // Aparecer todas as messages que já foram usadas
 
-            const response = await axios.post("/api/conversa", {
+            const response = await axios.post("/api/codigo", {
                 messages: newMessages
             });
 
             setMessages((current) => [...current, userMessage, response.data]);
 
             const updatedMessages = [...messages, userMessage, response.data];
-            localStorage.setItem("chatMessages", JSON.stringify(updatedMessages));
+            localStorage.setItem("codeMessages", JSON.stringify(updatedMessages));
 
             form.reset();
         } catch (error: any) {
@@ -64,13 +63,13 @@ const ConversationPage = () => {
         }
     }
 
-    const clearChatMessages = () => {
-        localStorage.removeItem("chatMessages");
+    const clearCodeMessages = () => {
+        localStorage.removeItem("codeMessages");
         setMessages([]);
     };
 
     useEffect(() => {
-        const savedMessages = localStorage.getItem("chatMessages");
+        const savedMessages = localStorage.getItem("codeMessages");
         if (savedMessages) {
           const parsedMessages = JSON.parse(savedMessages);
           setMessages(parsedMessages);
@@ -80,7 +79,7 @@ const ConversationPage = () => {
   return (
     <div>
         <div className="flex justify-between items-center">
-            <Heading title="Bate-papo" description="Faça requisições, tire dúvidas e muito mais!" icon={MessageSquare} iconColor="text-violet-500" bgColor="bg-violet-500/10" />
+            <Heading title="Gerador de códigos" description="Tire dúvidas sobre qualquer linguagem de programação!" icon={Code} iconColor="text-green-700" bgColor="bg-green-700/10" />
             <AlertDialog>
                 <AlertDialogTrigger asChild>
                     <Button className="mr-4 lg:mr-7" disabled={messages.length === 0} variant="destructive">
@@ -94,7 +93,7 @@ const ConversationPage = () => {
                     </AlertDialogHeader>
                     <AlertDialogFooter>
                         <AlertDialogCancel>Cancelar</AlertDialogCancel>
-                        <AlertDialogAction onClick={clearChatMessages}>Deletar</AlertDialogAction>
+                        <AlertDialogAction onClick={clearCodeMessages}>Deletar</AlertDialogAction>
                     </AlertDialogFooter>
                 </AlertDialogContent>
             </AlertDialog>
@@ -106,7 +105,7 @@ const ConversationPage = () => {
                         <FormField name="prompt" render={({ field }) => (
                             <FormItem className="col-span-10 lg:col-span-11">
                                 <FormControl className="m-0 p-0">
-                                    <Input className="text-sm bg-[#1f1f1f] focus-visible:ring-0 focus-visible:ring-transparent" disabled={isLoading} placeholder="Ex: Explique a teoria da relatividade de Einstein de forma simples." {...field} />
+                                    <Input className="text-sm bg-[#1f1f1f] focus-visible:ring-0 focus-visible:ring-transparent" disabled={isLoading} placeholder="Ex: O que é uma linguagem de programação?" {...field} />
                                 </FormControl>
                             </FormItem>
                         )} />
@@ -150,4 +149,4 @@ const ConversationPage = () => {
   )
 }
 
-export default ConversationPage
+export default CodePage

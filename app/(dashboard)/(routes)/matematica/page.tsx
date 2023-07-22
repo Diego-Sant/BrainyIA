@@ -2,19 +2,17 @@
 
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod"
-
 import axios from "axios";
+import { cn } from "@/lib/utils";
 import {ChatCompletionRequestMessage} from "openai";
 
-import { MessageSquare, SendHorizonal, Trash2 } from "lucide-react"
+import { Pi, SendHorizonal, Trash2 } from "lucide-react"
 
-import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import { useForm } from "react-hook-form"
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import Heading from "@/components/heading"
-import { cn } from "@/lib/utils";
 import { formSchema } from "./constants";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -25,7 +23,7 @@ import { UserAvatar } from "@/components/userAvatar";
 import { BotAvatar } from "@/components/botAvatar";
 import { AlertDialog, AlertDialogFooter, AlertDialogHeader, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 
-const ConversationPage = () => {
+const MathPage = () => {
     const router = useRouter();
     const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>([]);
     
@@ -47,14 +45,14 @@ const ConversationPage = () => {
 
             const newMessages = [...messages, userMessage]; // Aparecer todas as messages que já foram usadas
 
-            const response = await axios.post("/api/conversa", {
+            const response = await axios.post("/api/matematica", {
                 messages: newMessages
             });
 
             setMessages((current) => [...current, userMessage, response.data]);
 
             const updatedMessages = [...messages, userMessage, response.data];
-            localStorage.setItem("chatMessages", JSON.stringify(updatedMessages));
+            localStorage.setItem("mathMessages", JSON.stringify(updatedMessages));
 
             form.reset();
         } catch (error: any) {
@@ -64,13 +62,13 @@ const ConversationPage = () => {
         }
     }
 
-    const clearChatMessages = () => {
-        localStorage.removeItem("chatMessages");
+    const clearMathMessages = () => {
+        localStorage.removeItem("mathMessages");
         setMessages([]);
     };
 
     useEffect(() => {
-        const savedMessages = localStorage.getItem("chatMessages");
+        const savedMessages = localStorage.getItem("mathMessages");
         if (savedMessages) {
           const parsedMessages = JSON.parse(savedMessages);
           setMessages(parsedMessages);
@@ -80,7 +78,7 @@ const ConversationPage = () => {
   return (
     <div>
         <div className="flex justify-between items-center">
-            <Heading title="Bate-papo" description="Faça requisições, tire dúvidas e muito mais!" icon={MessageSquare} iconColor="text-violet-500" bgColor="bg-violet-500/10" />
+            <Heading title="Matemática" description="Tire dúvidas sobre cálculos, funções e muito mais!" icon={Pi} iconColor="text-cyan-500" bgColor="bg-cyan-500/10" />
             <AlertDialog>
                 <AlertDialogTrigger asChild>
                     <Button className="mr-4 lg:mr-7" disabled={messages.length === 0} variant="destructive">
@@ -94,7 +92,7 @@ const ConversationPage = () => {
                     </AlertDialogHeader>
                     <AlertDialogFooter>
                         <AlertDialogCancel>Cancelar</AlertDialogCancel>
-                        <AlertDialogAction onClick={clearChatMessages}>Deletar</AlertDialogAction>
+                        <AlertDialogAction onClick={clearMathMessages}>Deletar</AlertDialogAction>
                     </AlertDialogFooter>
                 </AlertDialogContent>
             </AlertDialog>
@@ -106,7 +104,7 @@ const ConversationPage = () => {
                         <FormField name="prompt" render={({ field }) => (
                             <FormItem className="col-span-10 lg:col-span-11">
                                 <FormControl className="m-0 p-0">
-                                    <Input className="text-sm bg-[#1f1f1f] focus-visible:ring-0 focus-visible:ring-transparent" disabled={isLoading} placeholder="Ex: Explique a teoria da relatividade de Einstein de forma simples." {...field} />
+                                    <Input className="text-sm bg-[#1f1f1f] focus-visible:ring-0 focus-visible:ring-transparent" disabled={isLoading} placeholder="Ex: Qual é a área de um círculo com raio de 5 metros? (Use π ≈ 3.14)" {...field} />
                                 </FormControl>
                             </FormItem>
                         )} />
@@ -129,18 +127,9 @@ const ConversationPage = () => {
                     {messages.map((message) => (
                         <div key={message.content} className={cn("p-8 w-full flex items-start gap-x-8 rounded-lg text-white", message.role === "user" ? "bg-[#1f1f1f] border border-black/10" : "bg-[#2d2d2d]")}>
                             {message.role === "user" ? <UserAvatar /> : <BotAvatar />}
-                            <ReactMarkdown className="text-sm overflow-hidden leading-7" components={{
-                                pre: ({node, ...props}) => (
-                                    <div className="overflow-auto w-full my-2 bg-black/20 p-2 rounded-lg">
-                                        <pre {...props} />
-                                    </div>
-                                ),
-                                code: ({ node, ...props}) => (
-                                    <code className="bg-black/40 rounded-lg p-1" {...props} />
-                                )
-                            }}>
-                                {message.content || ""}
-                            </ReactMarkdown>
+                            <p className={cn("text-sm", message.role === "user" ? "mt-1" : "mt-4")}>
+                                {message.content}
+                            </p>
                         </div>
                     ))}
                 </div>
@@ -150,4 +139,4 @@ const ConversationPage = () => {
   )
 }
 
-export default ConversationPage
+export default MathPage
