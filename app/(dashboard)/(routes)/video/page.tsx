@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 
 import axios from "axios";
 
-import { Music, SendHorizonal } from "lucide-react"
+import { SendHorizonal, VideoIcon } from "lucide-react"
 
 import { useForm } from "react-hook-form"
 import { useRouter } from "next/navigation";
@@ -19,9 +19,9 @@ import { Button } from "@/components/ui/button";
 import { Empty } from "@/components/empty";
 import { Loader } from "@/components/loader";
 
-const MusicPage = () => {
+const VideoPage = () => {
     const router = useRouter();
-    const [music, setMusic] = useState<string>();
+    const [video, setVideo] = useState<string>();
     
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -34,11 +34,11 @@ const MusicPage = () => {
 
     const onSubmit = async(values: z.infer<typeof formSchema>) => {
         try {
-            setMusic(undefined)
+            setVideo(undefined)
 
-            const response = await axios.post("/api/musica", values);
+            const response = await axios.post("/api/video", values);
 
-            setMusic(response.data.audio);
+            setVideo(response.data[0]);
 
             form.reset();
         } catch (error: any) {
@@ -51,7 +51,7 @@ const MusicPage = () => {
   return (
     <div>
         <div className="flex justify-between items-center">
-            <Heading title="Gerador de música" description="Seja criativo e crie sua própria melodia!" icon={Music} iconColor="text-emerald-500" bgColor="bg-emerald-500/10" />
+            <Heading title="Gerador de vídeo" description="Crie um vídeo curto de acordo com a sua criatividade!" icon={VideoIcon} iconColor="text-orange-700" bgColor="bg-orange-700/10" />
         </div>
         <div className="px-4 lg:px-8">
             <div>
@@ -60,11 +60,11 @@ const MusicPage = () => {
                         <FormField name="prompt" render={({ field }) => (
                             <FormItem className="col-span-10 lg:col-span-11">
                                 <FormControl className="m-0 p-0">
-                                    <Input className="text-sm bg-[#1f1f1f] focus-visible:ring-0 focus-visible:ring-transparent" disabled={isLoading} placeholder="Ex: Crie uma melodia relaxante e suave, perfeita para uma tarde tranquila." {...field} />
+                                    <Input className="text-sm bg-[#1f1f1f] focus-visible:ring-0 focus-visible:ring-transparent" disabled={isLoading} placeholder="Ex: Film a quick tour of a workspace or room. (De preferência em inglês)" {...field} />
                                 </FormControl>
                             </FormItem>
                         )} />
-                        <Button className="col-span-2 lg:col-span-1 w-full" disabled={isLoading}>
+                        <Button className="col-span-2 lg:col-span-1 w-full" type="submit" disabled={isLoading}>
                             <SendHorizonal />
                         </Button>
                     </form>
@@ -76,13 +76,13 @@ const MusicPage = () => {
                         <Loader />
                     </div>
                 )}
-                {!music && !isLoading && (
+                {!video && !isLoading && (
                     <Empty label="Ainda não foi gerado nenhuma música." />
                 )}
-                {music && (
-                    <audio controls className="w-full mt-8">
-                        <source src={music} />
-                    </audio>
+                {video && (
+                    <video controls className="w-full aspect-video mt-8 rounded-lg border bg-black">
+                        <source src={video} />
+                    </video>
                 )}
             </div>
         </div>
@@ -90,4 +90,4 @@ const MusicPage = () => {
   )
 }
 
-export default MusicPage
+export default VideoPage
