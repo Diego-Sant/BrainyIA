@@ -23,7 +23,7 @@ import { UserAvatar } from "@/components/userAvatar";
 import { BotAvatar } from "@/components/botAvatar";
 import { AlertDialog, AlertDialogFooter, AlertDialogHeader, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 
-const CiencePage = () => {
+const SciencePage = () => {
     const router = useRouter();
     const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>([]);
     
@@ -52,7 +52,7 @@ const CiencePage = () => {
             setMessages((current) => [...current, userMessage, response.data]);
 
             const updatedMessages = [...messages, userMessage, response.data];
-            localStorage.setItem("cienceMessages", JSON.stringify(updatedMessages));
+            localStorage.setItem("scienceMessages", JSON.stringify(updatedMessages));
 
             form.reset();
         } catch (error: any) {
@@ -62,13 +62,13 @@ const CiencePage = () => {
         }
     }
 
-    const clearCienceMessages = () => {
-        localStorage.removeItem("cienceMessages");
+    const clearScienceMessages = () => {
+        localStorage.removeItem("scienceMessages");
         setMessages([]);
     };
 
     useEffect(() => {
-        const savedMessages = localStorage.getItem("cienceMessages");
+        const savedMessages = localStorage.getItem("scienceMessages");
         if (savedMessages) {
           const parsedMessages = JSON.parse(savedMessages);
           setMessages(parsedMessages);
@@ -92,7 +92,7 @@ const CiencePage = () => {
                     </AlertDialogHeader>
                     <AlertDialogFooter>
                         <AlertDialogCancel>Cancelar</AlertDialogCancel>
-                        <AlertDialogAction onClick={clearCienceMessages}>Deletar</AlertDialogAction>
+                        <AlertDialogAction onClick={clearScienceMessages}>Deletar</AlertDialogAction>
                     </AlertDialogFooter>
                 </AlertDialogContent>
             </AlertDialog>
@@ -139,4 +139,4 @@ const CiencePage = () => {
   )
 }
 
-export default CiencePage
+export default SciencePage
