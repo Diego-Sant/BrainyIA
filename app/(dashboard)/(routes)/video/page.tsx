@@ -64,7 +64,7 @@ const VideoPage = () => {
                                 </FormControl>
                             </FormItem>
                         )} />
-                        <Button className="col-span-2 lg:col-span-1 w-full" type="submit" disabled={isLoading}>
+                        <Button className="col-span-2 lg:col-span-1 w-full bg-[#121212] hover:bg-[#121212]/60" type="submit" disabled={isLoading}>
                             <SendHorizonal />
                         </Button>
                     </form>

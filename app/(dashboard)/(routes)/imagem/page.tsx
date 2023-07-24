@@ -111,7 +111,7 @@ const ImagePage = () => {
                                 </Select>
                             </FormItem>
                         )} />
-                        <Button className="col-span-12 lg:col-span-1 w-full" disabled={isLoading}>
+                        <Button className="col-span-12 lg:col-span-1 w-full bg-[#121212] hover:bg-[#121212]/60" disabled={isLoading}>
                             <SendHorizonal />
                         </Button>
                     </form>
