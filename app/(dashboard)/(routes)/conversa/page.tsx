@@ -24,9 +24,11 @@ import { Loader } from "@/components/loader";
 import { UserAvatar } from "@/components/userAvatar";
 import { BotAvatar } from "@/components/botAvatar";
 import { AlertDialog, AlertDialogFooter, AlertDialogHeader, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
+import { useProModal } from "@/hooks/useProModal";
 
 const ConversationPage = () => {
     const router = useRouter();
+    const proModal = useProModal();
     const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>([]);
     
     const form = useForm<z.infer<typeof formSchema>>({
@@ -58,7 +60,9 @@ const ConversationPage = () => {
 
             form.reset();
         } catch (error: any) {
-            console.log(error)
+            if (error?.response?.status === 403) {
+                proModal.onOpen();
+            }
         } finally {
             router.refresh();
         }

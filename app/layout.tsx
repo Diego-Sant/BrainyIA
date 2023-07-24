@@ -6,6 +6,7 @@ import { ClerkProvider } from '@clerk/nextjs'
 
 import { ptBR } from "@clerk/localizations";
 import { dark } from '@clerk/themes';
+import { ModalProvider } from '@/components/modalProvider';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -22,7 +23,10 @@ export default function RootLayout({
   return (
     <ClerkProvider localization={ptBR} appearance={{baseTheme: dark}}>
       <html lang="pt-BR">
-        <body className={inter.className}>{children}</body>
+        <body className={inter.className}>
+          <ModalProvider />
+          {children}
+        </body>
       </html>
     </ClerkProvider>
   )
