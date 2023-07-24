@@ -25,7 +25,7 @@ const MobileNavbar = () => {
         </Button>
       </SheetTrigger>
       <SheetContent side="left" className="p-0">
-        <Sidebar />
+        <Sidebar apiLimitCount={1} />
       </SheetContent>
     </Sheet>
   )
