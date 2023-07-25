@@ -11,17 +11,22 @@ import { useProModal } from "@/hooks/useProModal";
 
 interface FreeCounterProps {
     apiLimitCount: number;
+    isPro: boolean;
 }
 
-export const FreeCounter: React.FC<FreeCounterProps> = ({ apiLimitCount }) => {
+export const FreeCounter: React.FC<FreeCounterProps> = ({ apiLimitCount = 0, isPro = false }) => {
     const [isMounted, setIsMounted] = useState(false);
     const proModal = useProModal();
     
     useEffect(() => {
         setIsMounted(true)
-      }, []);
+    }, []);
     
-      if (!isMounted) { 
+    if (!isMounted) { 
+        return null;
+    }
+
+    if (isPro) {
         return null;
     }
 

@@ -112,15 +112,15 @@ const FormControl = React.forwardRef<
       ref={ref}
       id={formItemId}
       aria-describedby={
-        !error
-          ? `${formDescriptionId}`
-          : `${formDescriptionId} ${formMessageId}`
+        !error ? `${formDescriptionId}` : `${formDescriptionId} ${formMessageId}`
       }
       aria-invalid={!!error}
+      className="whitespace-pre-wrap" // Adicionando a classe aqui
       {...props}
     />
-  )
-})
+  );
+});
+
 FormControl.displayName = "FormControl"
 
 const FormDescription = React.forwardRef<

@@ -64,7 +64,7 @@ const MusicPage = () => {
                         <FormField name="prompt" render={({ field }) => (
                             <FormItem className="col-span-10 lg:col-span-11">
                                 <FormControl className="m-0 p-0">
-                                    <Input className="text-sm bg-[#1f1f1f] focus-visible:ring-0 focus-visible:ring-transparent" disabled={isLoading} placeholder="Ex: Crie uma melodia relaxante e suave, perfeita para uma tarde tranquila." {...field} />
+                                    <textarea className="text-sm bg-[#1f1f1f] pt-[0.1rem] lg:pt-[0.6rem] -mb-4 focus-visible:ring-0 focus-visible:ring-transparent w-full outline-none" disabled={isLoading} placeholder="Ex: Crie uma melodia relaxante e suave, perfeita para uma tarde tranquila." {...field} />
                                 </FormControl>
                             </FormItem>
                         )} />

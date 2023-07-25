@@ -108,7 +108,7 @@ const MathPage = () => {
                         <FormField name="prompt" render={({ field }) => (
                             <FormItem className="col-span-10 lg:col-span-11">
                                 <FormControl className="m-0 p-0">
-                                    <Input className="text-sm bg-[#1f1f1f] focus-visible:ring-0 focus-visible:ring-transparent" disabled={isLoading} placeholder="Ex: Qual é a área de um círculo com raio de 5 metros? (Use π ≈ 3.14)" {...field} />
+                                    <textarea className="text-sm bg-[#1f1f1f] pt-[0.1rem] lg:pt-[0.6rem] -mb-4 focus-visible:ring-0 focus-visible:ring-transparent w-full outline-none" disabled={isLoading} placeholder="Ex: Qual é a área de um círculo com raio de 5 metros? (Use π ≈ 3.14)" {...field} />
                                 </FormControl>
                             </FormItem>
                         )} />

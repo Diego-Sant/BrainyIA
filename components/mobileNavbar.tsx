@@ -8,9 +8,10 @@ import { useEffect, useState } from "react";
 
 interface MobileNavbarProps {
   apiLimitCount: number;
+  isPro: boolean;
 }
 
-const MobileNavbar: React.FC<MobileNavbarProps> = ({ apiLimitCount }) => {
+const MobileNavbar: React.FC<MobileNavbarProps> = ({ apiLimitCount = 0, isPro = false }) => {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -29,7 +30,7 @@ const MobileNavbar: React.FC<MobileNavbarProps> = ({ apiLimitCount }) => {
         </Button>
       </SheetTrigger>
       <SheetContent side="left" className="p-0">
-        <Sidebar apiLimitCount={apiLimitCount} />
+        <Sidebar apiLimitCount={apiLimitCount} isPro={isPro} />
       </SheetContent>
     </Sheet>
   )

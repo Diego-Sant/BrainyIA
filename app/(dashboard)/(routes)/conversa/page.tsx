@@ -110,7 +110,7 @@ const ConversationPage = () => {
                         <FormField name="prompt" render={({ field }) => (
                             <FormItem className="col-span-10 lg:col-span-11">
                                 <FormControl className="m-0 p-0">
-                                    <Input className="text-sm bg-[#1f1f1f] focus-visible:ring-0 focus-visible:ring-transparent" disabled={isLoading} placeholder="Ex: Explique a teoria da relatividade de Einstein de forma simples." {...field} />
+                                    <textarea className="text-sm pt-[0.1rem] lg:pt-[0.6rem] bg-[#1f1f1f] -mb-4 focus-visible:ring-0 focus-visible:ring-transparent w-full outline-none" disabled={isLoading} placeholder="Ex: Explique a teoria da relatividade de Einstein de forma simples." {...field} />
                                 </FormControl>
                             </FormItem>
                         )} />
