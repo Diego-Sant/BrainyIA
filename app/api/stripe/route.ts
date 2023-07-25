@@ -44,8 +44,8 @@ export async function GET() {
                     price_data: {
                         currency: "BRL",
                         product_data: {
-                            name: "BrainyAI Pro",
-                            description: "Usos ilimitados do BrainyAI."
+                            name: "BrainyIA Pro",
+                            description: "Usos ilimitados do BrainyIA."
                         },
                         unit_amount: 2000,
                         recurring: {

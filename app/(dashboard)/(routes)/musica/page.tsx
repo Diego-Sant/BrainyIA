@@ -7,14 +7,14 @@ import axios from "axios";
 
 import { Music, SendHorizonal } from "lucide-react"
 
+import { toast } from "react-hot-toast";
 import { useForm } from "react-hook-form"
-import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 import Heading from "@/components/heading"
 import { formSchema } from "./constants";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Empty } from "@/components/empty";
 import { Loader } from "@/components/loader";
@@ -46,6 +46,8 @@ const MusicPage = () => {
         } catch (error: any) {
             if (error?.response?.status === 403) {
                 proModal.onOpen();
+            } else {
+                toast.error("Algo de errado aconteceu. Tente novamente mais tarde!")
             }
         } finally {
             router.refresh();

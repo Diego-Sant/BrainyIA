@@ -1,5 +1,4 @@
 import { Avatar, AvatarImage } from "./ui/avatar"
-import Logo from "@/public/images/logo.png"
 
 export const BotAvatar = () => {
     return (

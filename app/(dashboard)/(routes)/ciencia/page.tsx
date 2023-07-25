@@ -8,6 +8,7 @@ import {ChatCompletionRequestMessage} from "openai";
 
 import { TestTube2, SendHorizonal, Trash2 } from "lucide-react"
 
+import { toast } from "react-hot-toast";
 import { useForm } from "react-hook-form"
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -26,8 +27,8 @@ import { useProModal } from "@/hooks/useProModal";
 const SciencePage = () => {
     const router = useRouter();
     const proModal = useProModal();
-    const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>([]);
-    
+    const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>([]);    
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -59,6 +60,8 @@ const SciencePage = () => {
         } catch (error: any) {
             if (error?.response?.status === 403) {
                 proModal.onOpen();
+            } else {
+                toast.error("Algo de errado aconteceu. Tente novamente mais tarde!")
             }
         } finally {
             router.refresh();

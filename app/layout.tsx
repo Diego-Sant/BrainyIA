@@ -3,10 +3,11 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 
 import { ClerkProvider } from '@clerk/nextjs'
-
 import { ptBR } from "@clerk/localizations";
 import { dark } from '@clerk/themes';
+
 import { ModalProvider } from '@/components/modalProvider';
+import { ToastProvider } from '@/components/toasterProvider';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -25,6 +26,7 @@ export default function RootLayout({
       <html lang="pt-BR">
         <body className={inter.className}>
           <ModalProvider />
+          <ToastProvider />
           {children}
         </body>
       </html>

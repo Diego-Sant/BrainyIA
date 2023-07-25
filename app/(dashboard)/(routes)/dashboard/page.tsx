@@ -73,7 +73,7 @@ const Dashboard = () => {
     return (
       <div className="md:ml-2 rounded-l-md">
         <div className="mb-8 mt-2 space-y-2">
-          <h2 className="text-2xl md:text-3xl font-bold text-center py-4">Explore o poder do BrainyAI</h2>
+          <h2 className="text-2xl md:text-3xl font-bold text-center py-4">Explore o poder do BrainyIA</h2>
           <p className="text-gray-200 font-light text-sm md:text-lg text-center">Teste todas as funcionalidades da nossa AI</p>
         </div>
         <div className="px-4 md:px-20 lg:px-32 space-y-4">
